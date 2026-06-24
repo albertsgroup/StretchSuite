@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-const resend = new Resend('re_xxxxxxxxx'); // Replace with your real API key
+const resend = new Resend('re_UZ6bX6yR_BLL4pdrww5KM1vJnJwQGi2tb');
 
 resend.emails.send({
   from: 'onboarding@resend.dev',
