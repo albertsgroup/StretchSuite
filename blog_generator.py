@@ -33,7 +33,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "re_UZ6bX6yR_BLL4pdrww5KM1vJnJwQGi2tb")
 NOTIFY_EMAILS  = os.environ.get("NOTIFY_EMAILS", "hammad@albertsgroup.net,michelle@albertsgroup.net").split(",")
-FROM_EMAIL     = "Stretch Suite <blog@update.albertsgroup.net>"
+FROM_EMAIL     = "Stretch Suite <hello@stretchsuite.com>"
 
 BLOG_DIR = pathlib.Path(__file__).parent / "blogs"
 BLOG_DIR.mkdir(exist_ok=True)
