@@ -147,7 +147,7 @@ SEO & AEO requirements:
 {internal_links_str}
 8. Local SEO — mention Oswego, NY and Central New York at least twice each.
 9. CTA at the end — invite readers to book a session at {BUSINESS['name']}.
-10. Word count: 900–1200 words.
+10. Word count: 500–600 words.
 11. Tone: friendly, knowledgeable, not salesy.
 
 Return a JSON object with exactly these keys:
