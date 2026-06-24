@@ -32,7 +32,7 @@ from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "re_UZ6bX6yR_BLL4pdrww5KM1vJnJwQGi2tb")
-NOTIFY_EMAIL   = os.environ.get("NOTIFY_EMAIL", "hammad@albertsgroup.net")
+NOTIFY_EMAILS  = os.environ.get("NOTIFY_EMAILS", "hammad@albertsgroup.net,michelle@albertsgroup.net").split(",")
 FROM_EMAIL     = "onboarding@resend.dev"
 
 BLOG_DIR = pathlib.Path(__file__).parent / "blogs"
@@ -102,7 +102,7 @@ def markdown_to_docx(post: dict) -> pathlib.Path:
 
 def send_notification(post: dict, filepath: pathlib.Path) -> None:
     """Email the .docx as an attachment via Resend."""
-    print(f"Sending email → {NOTIFY_EMAIL}")
+    print(f"Sending email → {', '.join(NOTIFY_EMAILS)}")
 
     with open(filepath, "rb") as f:
         attachment_b64 = base64.b64encode(f.read()).decode()
@@ -123,7 +123,7 @@ def send_notification(post: dict, filepath: pathlib.Path) -> None:
         },
         json={
             "from":    FROM_EMAIL,
-            "to":      NOTIFY_EMAIL,
+            "to":      NOTIFY_EMAILS,
             "subject": "New blog is ready to view",
             "html":    html,
             "attachments": [{
