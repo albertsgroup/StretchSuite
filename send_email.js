@@ -1,6 +1,10 @@
 import { Resend } from 'resend';
 
-const resend = new Resend('re_UZ6bX6yR_BLL4pdrww5KM1vJnJwQGi2tb');
+if (!process.env.RESEND_API_KEY) {
+  throw new Error('RESEND_API_KEY is not set in the environment');
+}
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 resend.emails.send({
   from: 'Stretch Suite <hello@stretchsuite.com>',
