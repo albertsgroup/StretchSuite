@@ -16,7 +16,7 @@ JSON schema:
   }
 
 Required env var:
-  RESEND_API_KEY  (falls back to the key below if not set)
+  RESEND_API_KEY  (no fallback — must be set in the environment, never in code)
 """
 
 import os
@@ -31,7 +31,7 @@ from docx import Document
 from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "re_UZ6bX6yR_BLL4pdrww5KM1vJnJwQGi2tb")
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
 NOTIFY_EMAILS  = os.environ.get("NOTIFY_EMAILS", "hammad@albertsgroup.net,michelle@albertsgroup.net").split(",")
 FROM_EMAIL     = "Stretch Suite <hello@stretchsuite.com>"
 
@@ -102,6 +102,10 @@ def markdown_to_docx(post: dict) -> pathlib.Path:
 
 def send_notification(post: dict, filepath: pathlib.Path) -> None:
     """Email the .docx as an attachment via Resend."""
+    if not RESEND_API_KEY:
+        print("Email failed: RESEND_API_KEY is not set in the environment", file=sys.stderr)
+        sys.exit(1)
+
     print(f"Sending email → {', '.join(NOTIFY_EMAILS)}")
 
     with open(filepath, "rb") as f:
