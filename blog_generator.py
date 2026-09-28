@@ -115,9 +115,11 @@ def send_notification(post: dict, filepath: pathlib.Path) -> None:
 <h2>New blog is ready to view</h2>
 <p><strong>{post['title']}</strong></p>
 <p>{post['meta_description']}</p>
-<p>The blog post is attached as a Word document.</p>
-<p><em>Generated {datetime.date.today()} — Stretch Suite Blog Automation</em></p>
+<p>The blog post is attached as a Word document (.docx).</p>
+<p><em>Generated {datetime.date.today()} - Stretch Suite Blog Automation</em></p>
 """
+    if post.get("all_topics_complete"):
+        html += "<p>PS: list completed!</p>\n"
 
     resp = requests.post(
         "https://api.resend.com/emails",
@@ -128,7 +130,7 @@ def send_notification(post: dict, filepath: pathlib.Path) -> None:
         json={
             "from":    FROM_EMAIL,
             "to":      NOTIFY_EMAILS,
-            "subject": "New blog is ready to view",
+            "subject": "New blog - Stretch Suite",
             "html":    html,
             "attachments": [{
                 "filename": filepath.name,
