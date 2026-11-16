@@ -128,7 +128,7 @@ def send_notification(post: dict, filepath: pathlib.Path) -> None:
         json={
             "from":    FROM_EMAIL,
             "to":      NOTIFY_EMAILS,
-            "subject": "New blog is ready to view",
+            "subject": "New blog - Stretch Suite",
             "html":    html,
             "attachments": [{
                 "filename": filepath.name,
